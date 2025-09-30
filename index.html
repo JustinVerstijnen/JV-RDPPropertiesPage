@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>RDP Settings Table</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; background-color: #fdfdfd; }
+#searchInput { margin-bottom: 10px; padding: 8px; width: 50%; border: 1px solid #8EAFDA; border-radius: 4px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { border: 1px solid #8EAFDA; padding: 8px; text-align: left; vertical-align: top; }
+thead { background: #8EAFDA; color: #fff; position: sticky; top: 0; }
+th { font-size: 13px; text-align: center; }
+tbody tr:nth-child(even) { background: #f0f5fb; }
+tbody tr:hover { background-color: #e4ecf7; }
+code { background: #f4f7fb; padding: 2px 4px; border-radius: 3px; }
+</style>
+<script>
+function searchTable() {
+  var input = document.getElementById("searchInput");
+  var filter = input.value.toLowerCase();
+  var table = document.getElementById("rdptable");
+  var trs = table.getElementsByTagName("tr");
+  for (var i = 1; i < trs.length; i++) {
+    var tds = trs[i].getElementsByTagName("td");
+    var show = false;
+    for (var j = 0; j < tds.length; j++) {
+      if (tds[j].innerHTML.toLowerCase().indexOf(filter) > -1) {
+        show = true;
+        break;
+      }
+    }
+    trs[i].style.display = show ? "" : "none";
+  }
+}
+</script>
+</head>
+<body>
+<h2>RDP Settings</h2>
+<input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search settings...">
+<table id="rdptable">
+
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Value (by default)</th>
+<th>Support AVD</th>
+<th>Support RDP</th>
+<th>Description</th>
+</tr>
+</thead>
+<tr></tr>
+<tr><td><code>administrativesession</code></td><td>i</td><td>0</td><td>No</td><td>Yes</td><td>Connect to the administrative session (console) of the remote computer.<p>0 - Do not use the administrative session</p><p>1 - Connect to the administrative session</p></td></tr>
+<tr><td><code>allowdesktopcomposition</code></td><td>i</td><td>0</td><td>No</td><td>Yes</td><td>Determines whether desktop composition (needed for Aero) is permitted when you log on to the remote computer.<p>0 - Disable desktop composition in the remote session</p><p>1 - Desktop composition is permitted</p></td></tr>
+<tr><td><code>allowfontsmoothing</code></td><td>i</td><td>0</td><td>No</td><td>Yes</td><td>Determines whether font smoothing may be used in the remote session.<p>0 - Disable font smoothing in the remote session</p><p>1 - Font smoothing is permitted</p></td></tr>
+<tr><td><code>alternatefulladdress</code></td><td>s</td><td></td><td>No</td><td>Yes</td><td>Specifies an alternate name or IP address of the remote computer that you want to connect to. <p>Will be overruled by RDP+.</p></td></tr>
+<tr><td><code>alternateshell</code></td><td>s</td><td></td><td>No</td><td>Yes</td><td>Specifies a program to be started automatically when you connect to a remote computer. The value should be a valid path to an executable file.
+This setting only works when connecting to Windows Server instances.</td></tr>
+<tr><td><code>audiocapturemode</code></td><td>i</td><td>0</td><td>No</td><td>Yes</td><td>Determines how sounds captured (recorded) on the local computer are handled when you are connected to the remote computer.<p>0 - Do not capture audio from the local computer</p><p>1 - Capture audio from the local computer and send to the remote computer</p></td></tr>
+<tr><td><code>audiomode</code></td><td>i</td><td>0</td><td>No</td><td>Yes</td><td>Determines how sounds on a remote computer are handled when you are connected to the remote computer.<p>0 - Play sounds on the local computer</p><p>1 - Play sounds on the remote computer</p><p>2 - Do not play sounds</p></td></tr>
+<tr><td><code>audioqualitymode</code></td><td>i</td><td>0</td><td>No</td><td>Yes</td><td>Determines the quality of the audio played in the remote session.<p>0 - Dynamically adjust audio quality based on available bandwidth</p><p>1 - Always use medium audio quality</p><p>2 - Always use uncompressed audio quality</p></td></tr>
+<tr><td><code>authenticationlevel</code></td><td>i</td><td>2</td><td>No</td><td>Yes</td><td>Determines what should happen when server authentication fails.<p>0 - If server authentication fails, connect without giving a warning</p><p>1 - If server authentication fails, do not connect</p><p>2 - If server authentication fails, show a warning and allow the user to connect or not</p><p>3 - Server authentication is not required </p><p>This setting will be overruled by RDP+.</p></td></tr>
+<tr><td><code>autoreconnectmaxretries</code></td><td>i</td><td>20</td><td>No</td><td>Yes</td><td>Determines the maximum number of times the client computer will try to.</td></tr>
+<tr><td><code>autoreconnectionenabled</code></td><td>i</td><td>1</td><td>No</td><td>Yes</td><td>Determines whether the client computer will automatically try to reconnect to the remote computer if the connection is dropped.<p>0 - Do not attempt to reconnect</p><p>1 - Attempt to reconnect</p></td></tr>
+<tr><td><code>bandwidthautodetect</code></td><td>i</td><td>1</td><td>No</td><td>Yes</td><td>Enables the option for automatic detection of the network type. Used in conjunction with networkautodetect. Also see connection type.<p>0 - Do not enable the option for automatic network detection</p><p>1 - Enable the option for automatic network detection</p></td></tr>
+<tr><td><code>bitmapcachepersistenable</code></td><td>i</td><td>1</td><td>No</td><td>Yes</td><td>Determines whether bitmaps are cached on the local computer (disk-based cache). Bitmap caching can improve the performance of your remote session.<p>0 - Do not cache bitmaps</p><p>1 - Cache bitmaps</p></td></tr>
+<tr><td><code>bitmapcachesize</code></td><td>i</td><td>1500</td><td>No</td><td>Yes</td><td>Specifies the size in kilobytes of the memory-based bitmap cache. The maximum value is 32000.</td></tr>
+<tr><td><code>camerastoredirect</code></td><td>s</td><td></td><td>No</td><td>Yes</td><td>Determines which cameras to redirect. This setting uses a semicolon-delimited list of KSCATEGORY_VIDEO_CAMERA interfaces of cameras enabled for redirection.No</td></tr>
+<tr><td><code>compression</code></td><td>i</td><td>1</td><td>No</td><td>Yes</td><td>Determines whether the connection should use bulk compression.<p>0 - Do not use bulk compression</p><p>1 - Use bulk compression</p></td></tr>
+<tr><td><code>connecttoconsole</code></td><td>i</td><td>0</td><td>No</td><td>Yes</td><td>Connect to the console session of the remote computer.<p></p><p><p>0 - Connect to a normal session</p><p>1 - Connect to the console screen</p></td></tr>
+<tr><td><code>connectiontype</code></td><td>i</td><td>2</td><td>No</td><td>Yes</td><td>Specifies pre-defined performance settings for the Remote Desktop session.<p>1 - Modem (56 Kbps)</p><p>2 - Low-speed broadband (256 Kbps - 2 Mbps)</p><p>3 - Satellite (2 Mbps - 16 Mbps with high latency)</p><p>4 - High-speed broadband (2 Mbps - 10 Mbps)</p><p>5 - WAN (10 Mbps or higher with high latency)</p><p>6 - LAN (10 Mbps or higher)</p><p>7 - Automatic bandwidth detection. Requires bandwidthautodetect. By itself, this setting does nothing. When selected in the RDC GUI, this option changes several performance related settings (themes, animation, font smoothing, etcetera). These separate settings always overrule the connection type setting.</p></td></tr>
+<tr><td><code>desktopsizeid</code></td><td>i</td><td>0</td><td>Yes</td><td>Yes</td><td>Specifies pre-defined dimensions of the Remote Desktop session.<p>0 - 640x480</p><p>1 - 800x600</p><p>2 - 1024x768</p><p>3 - 1280x1024</p><p>4 - 1600x1200</p><p>This setting is ignored when either /w and /h, or desktopwidth and desktopheight are already specified.</p></td></tr>
+<tr><td><code>desktopheight</code></td><td>i</td><td>600</td><td>Yes</td><td>Yes</td><td>The height (in pixels) of the Remote Desktop session.</td></tr>
+<tr><td><code>desktopwidth</code></td><td>i</td><td>800</td><td>Yes</td><td>Yes</td><td>The width (in pixels) of the Remote Desktop session.</td></tr>
+<tr><td><code>devicestoredirect</code></td><td>s</td><td></td><td>No</td><td>Yes</td><td>Determines which supported Plug and Play devices on the client computer will be redirected and available in the remote session. <p>No value specified - Do not redirect any supported Plug and Play devices.</p><p>* - Redirect all supported Plug and Play devices, including ones that are connected later.</p><p>DynamicDevices - Redirect any supported Plug and Play devices that are connected later.</p><p>The hardware ID for one or more Plug and Play devices - Redirect the specified supported Plug and Play device(s)</p></td></tr>
+<tr><td><code>disablefullwindowdrag</code></td><td>i</td><td>1</td><td>No</td><td>Yes</td><td>Determines whether window content is displayed when you drag the window to a new location.<p>0 - Show the contents of the window while dragging</p><p>1 - Show an outline of the window while dragging</p></td></tr>
+<tr><td><code>disablemenuanims</code></td><td>i</td><td>1</td><td>No</td><td>Yes</td><td>Determines whether menus and windows can be displayed with animation effects in the remote session.<p>0 - Menu and window animation is permitted</p><p>1 - No menu and window animation</p></td></tr>
+<tr><td><code>disablethemes</code></td><td>i</td><td>0</td><td>No</td><td>Yes</td><td>Determines whether themes are permitted when you log on to the remote computer.<p>0 - Themes are permitted</p><p>1 - Disable theme in the remote session</p></td></tr>
+<tr><td><code>disablewallpaper</code></td><td>i</td><td>1</td><td>No</td><td>Yes</td><td>Determines whether the desktop background is displayed in the remote session.<p>0 - Display the wallpaper <p></p><p>1 - Do not show any wallpaper</p></td></tr>
+<tr><td><code>disableconnectionsharing</code></td><td>i</td><td>0</td><td>No</td><td>Yes</td><td>Determines whether a new Terminal Server session is started with every launch of a RemoteApp to the same computer and with the same credentials.<p>0 - No new session is started. The currently active session of the user is shared</p><p>1 - A new login session is started for the RemoteApp</p></td></tr>
+<tr><td><code>disableremoteappcapscheck</code></td><td>i</td><td>0</td><td>No</td><td>Yes</td><td>Specifies whether the Remote Desktop client should check the remote computer for RemoteApp capabilities.<p>0 - Check the remote computer for RemoteApp capabilities before logging in</p><p>1 - Do not check the remote computer for RemoteApp capabilities</p></td></tr>
+<tr><td><code>displayconnectionbar</code></td><td>i</td><td>1</td><td>No</td><td>Yes</td><td>Determines whether the connection bar appears when you are in full screen mode. Press CTRL+ALT+HOME to bring it back temporarily.<p>0 - Do not show the connection bar</p><p>1 - Show the connection bar <p>Will be overruled by RDP+ when using the parameter.</p></td></tr>
+<tr><td><code>domain</code></td><td>s</td><td></td><td>No</td><td>Yes</td><td>Configures the domain of the user.</td></tr>
+<tr><td><code>drivestoredirect</code></td><td>s</td><td></td><td>No</td><td>Yes</td><td>Determines which local disk drives on the client computer will be redirected and available in the remote session. <p>No value specified - Do not redirect any drives.</p><p>* - Redirect all disk drives, including drives that are connected later.</p><p>DynamicDrives - Redirect any drives that are connected later.</p></td></tr>
+<tr><td><code>enablecredsspsupport</code></td><td>i</td><td>1</td><td>No</td><td>Yes</td><td>Determines whether Remote Desktop will use CredSSP for authentication if it's available.<p>0 - Do not use CredSSP, even if the operating system supports it</p><p>1 - Use CredSSP, if the operating system supports it</p></td></tr>
+<tr><td><code>enablesuperpan</code></td><td>i</td><td>0</td><td>No</td><td>Yes</td><td>Determines whether SuperPan is enabled or disabled. SuperPan allows the user to navigate a remote desktop in full-screen mode without scroll bars, when the dimensions of the remote desktop are larger than the dimensions of the current client window. The user can point to the window border, and the desktop view will scroll automatically in that direction.<p>0 - Do not use SuperPan. The remote session window is sized to the client window size.</p><p>1 - Enable SuperPan. The remote session window is sized to the dimensions specified through /w and /h, or through desktopwidth and desktopheight.</p></td></tr>
+<tr><td><code>encoderedirectedvideocapture</code></td><td>i</td><td>1</td><td>No</td><td>Yes</td><td>Enables or disables encoding of redirected video.<p>0 - Disable encoding of redirected video</p><p>1 - Enable encoding of redirected video</p></td></tr>
+<tr><td><code>fulladdress</code></td><td>s</td><td></td><td>No</td><td>Yes</td><td>Specifies the name or IP address (and optional port) of the remote computer that you want to connect to.</td></tr>
+<tr><td><code>gatewaycredentialssource</code></td><td>i</td><td>4</td><td>No</td><td>Yes</td><td>Specifies the credentials that should be used to validate the connection with the RD Gateway.<p>0 - Ask for password (NTLM)</p><p>1 - Use smart card</p><p>4 - Allow user to select later</p></td></tr>
+<tr><td><code>gatewayhostname</code></td><td>s</td><td></td><td>No</td><td>Yes</td><td>Specifies the hostname of the RD Gateway.</td></tr>
+<tr><td><code>gatewayprofileusagemethod</code></td><td>i</td><td>0</td><td>No</td><td>Yes</td><td>Determines the RD Gateway authentication method to be used.<p>0 - Use the default profile mode, as specified by the administrator</p><p>1 - Use explicit settings</p></td></tr>
+<tr><td><code>gatewayusagemethod</code></td><td>i</td><td>4</td><td>No</td><td>Yes</td><td>Specifies if and how to use a Gateway) server.<p>0 - Do not use an RD Gateway server</p><p>1 - Always use an RD Gateway, even for local connections</p><p>2 - Use the RD Gateway if a direct connection cannot be made to the remote computer (i.e. bypass for local addresses)</p><p>3 - Use the default RD Gateway settings</p></td></tr>
+<tr><td><code>keyboardhook</code></td><td>i</td><td>2</td><td>Yes</td><td>Yes</td><td>Determines how Windows key combinations are applied when you are connected to a remote computer.<p>0 - Windows key combinations are applied on the local computer</p><p>1 - Windows key combinations are applied on the remote computer</p><p>2 - Windows key combinations are applied in full-screen mode only</p></td></tr>
+<tr><td><code>negotiate security layer</code></td><td>i</td><td>1</td><td>No</td><td>Yes</td><td>Determines whether the level of security is negotiated.<p>0 - Security layer negotiation is not enabled and the session is started by using Secure Sockets Layer (SSL)</p><p>1 - Security layer negotiation is enabled and the session is started by using x.224 encryption</p></td></tr>
+<tr><td><code>networkautodetect</code></td><td>i</td><td>1</td><td>No</td><td>Yes</td><td>Determines whether to use auomatic network bandwidth detection or not. Requires the option bandwidthautodetect to be set and correlates with connection type 7.<p>0 - Use automatic network bandwitdh detection</p><p>1 - Do not use automatic network bandwitdh detection</p></td></tr>
+<tr><td><code>password51</code></td><td>b</td><td></td><td>No</td><td>Yes</td><td>The user password in a binary hash value.</td></tr>
+<tr><td><code>pinconnectionbar</code></td><td>i</td><td>1</td><td>No</td><td>Yes</td><td>Determines whether or not the connection bar should be pinned to the top of the remote session upon connection when in full screen mode.<p>0 - The connection bar should not be pinned to the top of the remote session</p><p>1 - The connection bar should be pinned to the top of the remote session</p></td></tr>
+<tr><td><code>promptforcredentials</code></td><td>i</td><td>0</td><td>No</td><td>Yes</td><td>Determines whether Remote Desktop Connection will prompt for credentials when connecting to a remote computer for which the credentials have been previously saved.<p>0 - Remote Desktop will use the saved credentials and will not prompt for credentials.</p><p>1 - Remote Desktop will prompt for credentials. This setting is ignored by RDP+.</p></td></tr>
+<tr><td><code>promptforcredentialsonclient</code></td><td>i</td><td>0</td><td>No</td><td>Yes</td><td>Determines whether Remote Desktop Connection will prompt for credentials when connecting to a server that does not support server authentication.<p></p><p><p>0 - Remote Desktop will not prompt for credentials</p><p>1 - Remote Desktop will prompt for credentials</p></td></tr>
+<tr><td><code>promptcredentialonce</code></td><td>i</td><td>1</td><td>No</td><td>Yes</td><td>When connecting through an RD Gateway, determines whether RDC should use the same credentials for both the RD Gateway and the remote computer.<p>0 - Remote Desktop will not use the same credentials</p><p>1 - Remote Desktop will use the same credentials for both the RD gateway and the remote computer</p></td></tr>
+<tr><td><code>publicmode</code></td><td>i</td><td>0</td><td>No</td><td>Yes</td><td>Determines whether Remote Desktop Connection will be started in public mode.<p>0 - Remote Desktop will not start in public mode</p><p>1 - Remote Desktop will start in public mode and will not save any user data (credentials, bitmap cache, MRU) on the local machine</p></td></tr>
+<tr><td><code>redirectclipboard</code></td><td>i</td><td>1</td><td>Yes</td><td>Yes</td><td>Determines whether the clipboard on the client computer will be redirected and available in the remote session and vice versa.<p>0 - Do not redirect the clipboard</p><p>1 - Redirect the clipboard<p></p><p></p><p></td></tr>
+<tr><td><code>redirectcomports</code></td><td>i</td><td>0</td><td>Yes</td><td>Yes</td><td>Determines whether the COM (serial) ports on the client computer will be redirected and available in the remote session.<p>0 - The COM ports on the local computer are not available in the remote session</p><p>1 - The COM ports on the local computer are available in the remote session</p></td></tr>
+<tr><td><code>redirectdirectx</code></td><td>i</td><td>1</td><td>No</td><td>Yes</td><td>Determines whether DirectX will be enabled for the remote session.<p>0 - Do not enable DirectX rendering</p><p>1 - Enable DirectX rendering in the remote session</p></td></tr>
+<tr><td><code>redirectedvideocaptureencodingquality</code></td><td>i</td><td>0</td><td>No</td><td>Yes</td><td>Controls the quality of encoded video.<p>0 - High compression video. Quality may suffer when there's a lot of motion</p><p>1 - Medium compression</p><p>2 - Low compression video with high picture quality</p></td></tr>
+<tr><td><code>redirectlocation</code></td><td>i</td><td>0</td><td>No</td><td>Yes</td><td>Determines whether the location of the local device will be redirected and available in the remote session.<p>0 - The remote session uses the location of the remote computer</p><p>1 - The remote session uses the location of the local device<p></p><p></p><p></td></tr>
+<tr><td><code>redirectposdevices</code></td><td>i</td><td>0</td><td>No</td><td>Yes</td><td>Determines whether Microsoft Point of Service (POS) for .NET devices connected to the client computer will be redirected and available in the remote session.<p>0 - The POS devices from the local computer are not available in the remote session</p><p>1 - The POS devices from the local computer are available in the remote session</p></td></tr>
+<tr><td><code>redirectprinters</code></td><td>i</td><td>1</td><td>Yes</td><td>Yes</td><td>Determines whether printers configured on the client computer will be redirected and available in the remote session.<p>0 - The printers on the local computer are not available in the remote session</p><p>1 - The printers on the local computer are available in the remote session</p></td></tr>
+<tr><td><code>redirectsmartcards</code></td><td>i</td><td>1</td><td>Yes</td><td>Yes</td><td>Determines whether smart card devices on the client computer will be redirected and available in the remote session.<p>0 - The smart card device on the local computer is not available in the remote session</p><p>1 - The smart card device on the local computer is available in the remote session</p></td></tr>
+<tr><td><code>redirectwebauthn</code></td><td>i</td><td>1</td><td>Yes</td><td>Yes</td><td>Determines whether WebAuthn requests on the remote computer will be redirected to the local computer allowing the use of local authenticators (such as Windows Hello for Business and security key).<p>0 - WebAuthn requests from the remote session aren't sent to the local computer for authentication and must be completed in the remote session</p><p>1 - WebAuthn requests from the remote session are sent to the local computer for authentication<p></p><p></p><p></td></tr>
+<tr><td><code>remoteapplicationicon</code></td><td>s</td><td></td><td>No</td><td>Yes</td><td>the file name of an icon file to be displayed in the while starting the RemoteApp. By default RDC will show the standard Note: Only .ico files are supported.No</td></tr>
+<tr><td><code>remoteapplicationmode</code></td><td>i</td><td>0</td><td>No</td><td>Yes</td><td>Determines whether a RemoteApp shoud be launched when connecting<p>0 - Use a normal session and do not start a RemoteApp</p><p>1 - Connect and launch a RemoteApp</p></td></tr>
+<tr><td><code>remoteapplicationname</code></td><td>s</td><td></td><td>No</td><td>Yes</td><td>the name of the RemoteApp in the Remote Desktop interface while starting the RemoteApp.</td></tr>
+<tr><td><code>remoteapplicationprogram</code></td><td>s</td><td></td><td>No</td><td>Yes</td><td>Specifies the alias or executable name of the RemoteApp.</td></tr>
+<tr><td><code>screenmodeid</code></td><td>i</td><td>2</td><td>Yes</td><td>Yes</td><td>Determines whether the remote session window appears full screen when you connect to the remote computer.<p>1 - The remote session will appear in a window</p><p>2 - The remote session will appear full screen</p></td></tr>
+<tr><td><code>selectedmonitors</code></td><td>s</td><td></td><td>Yes</td><td>Yes</td><td>Specifies which local displays to use for the remote session. The selected displays must be contiguous. Requires use multimon to be set to 1. <p>Comma separated list of machine-specific display IDs. You can retrieve IDs by calling mstsc.exe /l. The first ID listed will be set as the primary display in the session. Defaults to all displays.</p></td></tr>
+<tr><td><code>serverport</code></td><td>i</td><td>3389</td><td>No</td><td>Yes</td><td>Defines an alternate default port for the Remote Desktop connection. Will be overruled by any port number appended to the server name.</td></tr>
+<tr><td><code>sessionbpp</code></td><td>i</td><td>32</td><td>No</td><td>Yes</td><td>Determines the color depth (in bits) on the remote computer when you connect.<p>8 - 256 colors (8 bit)</p><p>15 - High color (15 bit)</p><p>16 - High color (16 bit)</p><p>24 - True color (24 bit)</p><p>32 - Highest quality (32 bit)</p></td></tr>
+<tr><td><code>shellworkingdirectory</code></td><td>s</td><td></td><td>No</td><td>Yes</td><td>The working directory on the remote computer to be used if an alternate shell is specified.</td></tr>
+<tr><td><code>signature</code></td><td>s</td><td></td><td>No</td><td>Yes</td><td>The encoded signature when using .rdp file signing.</td></tr>
+<tr><td><code>signscope</code></td><td>s</td><td></td><td>No</td><td>Yes</td><td>Comma-delimited list of .rdp file settings for which the signature is generated when using .rdp file signing.</td></tr>
+<tr><td><code>smartsizing</code></td><td>i</td><td>0</td><td>Yes</td><td>Yes</td><td>Determines whether the client computer should scale the content on the remote computer to fit the window size of the client computer when the window is resized.<p>0 - The client window display will not be scaled when resized</p><p>1 - The client window display will automatically be scaled when resized</p></td></tr>
+<tr><td><code>spanmonitors</code></td><td>i</td><td>0</td><td>No</td><td>Yes</td><td>Determines whether the remote session window will be spanned across multiple monitors when you connect to the remote computer.<p>0 - Monitor spanning is not enabled</p><p>1 - Monitor spanning is enabled</p></td></tr>
+<tr><td><code>superpanaccelerationfactor</code></td><td>i</td><td>1</td><td>No</td><td>Yes</td><td>Specifies the number of pixels that the screen view scrolls in a given direction for every pixel of mouse movement by the client when in SuperPan mode.</td></tr>
+<tr><td><code>usbdevicestoredirect</code></td><td>s</td><td></td><td>Yes</td><td>Yes</td><td>which supported RemoteFX USB devices on the client computer will be redirected and available in the remote session when you connect to a remote session that supports RemoteFX USB redirection. <p>No value specified - Do not redirect any supported RemoteFX USB devices</p><p>* - Redirect all supported RemoteFX USB devices for redirection that are not</p></td></tr>
+<tr><td><code>usemultimon</code></td><td>i</td><td>0</td><td>Yes</td><td>Yes</td><td>Determines whether the session should use true multiple monitor support when connecting to the remote computer.<p>0 - Do not enable multiple monitor support</p><p>1 - Enable multiple monitor support</p></td></tr>
+<tr><td><code>username</code></td><td>s</td><td></td><td>No</td><td>Yes</td><td>the name of the user account that will be used to log on to the remote computer.</td></tr>
+<tr><td><code>videoplaybackmode</code></td><td>i</td><td>1</td><td>No</td><td>Yes</td><td>Determines whether RDC will use RDP efficient multimedia streaming for video playback.<p>0 - Do not use RDP efficient multimedia streaming for video playback</p><p>1 - Use RDP efficient multimedia streaming for video playback when possible</p></td></tr>
+<tr><td><code>winposstr</code></td><td>s</td><td>0,3,0,0,800,600</td><td>No</td><td>Yes</td><td>Specifies the position and dimensions of the session window on the client computer.</td></tr>
+<tr><td><code>workspaceid</code></td><td>s</td><td></td><td>No</td><td>Yes</td><td>This setting defines the RemoteApp and Desktop ID associated with the RDP file that contains this setting.</td></tr></tbody>
+</table>
+</body>
+</html>
